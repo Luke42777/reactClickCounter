@@ -63,8 +63,12 @@ class Counter extends React.Component {
                     type="add"
                     click={this.handleMathClick}
                 />
-                <h1>Click counter: {this.state.count}</h1>
-                <h1>Result: {this.state.result}</h1>
+
+                <DisplayPanel 
+                counter={this.state.count}
+                result={this.state.result}
+                 />
+
             </>
         )
     }
@@ -74,6 +78,15 @@ class Counter extends React.Component {
 const MathButton = (props) => {
     return(
         <button onClick={() => props.click(props.type,Number(props.number))}>{props.name}</button>
+    )
+}
+
+const DisplayPanel = (props) => {
+    return(
+        <>
+        <h1>Click counter: {props.counter} {(props.counter >= 10) ? <span>"Processor overheated!!"</span> : null} </h1>
+        <h1>Result: {props.result}</h1>
+        </>
     )
 }
 
