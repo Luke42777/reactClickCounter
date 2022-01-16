@@ -5,32 +5,32 @@ class Counter extends React.Component {
 
     }
 
-    handleMathClick(type,number = 1){
-        
-        if(type === "add"){
-        
+    handleMathClick = (type, number = 1) => {
+//debugger
+        if (type === "add") {
+
             this.setState((prevState) => (
                 {
-                   count: prevState.count + 1,
-                   result: prevState.result + number
+                    count: prevState.count + 1,
+                    result: prevState.result + number
                 }
             ))
 
         }
-        else if(type === "sub"){
+        else if (type === "sub") {
             this.setState((prevState) => (
                 {
-                   count: prevState.count + 1,
-                   result: prevState.result - 1
+                    count: prevState.count + 1,
+                    result: prevState.result - 1
                 }
             ))
 
         }
-        else{
+        else {
             this.setState((prevState) => (
                 {
-                   count: prevState.count + 1,
-                   result: 0
+                    count: prevState.count + 1,
+                    result: 0
                 }
             ))
 
@@ -39,10 +39,30 @@ class Counter extends React.Component {
     render() {
         return (
             <>
-                <button onClick={() => this.handleMathClick("add")}>+1</button>
-                <button onClick={() => this.handleMathClick("sub")}>-1</button>
-                <button onClick={() => this.handleMathClick("clear")}>Reset</button>
-                <button onClick={() => this.handleMathClick("add",100)}>+100</button>
+                <MathButton
+                    name="+1"
+                    number="1"
+                    type="add"
+                    click={this.handleMathClick}
+                />
+                <MathButton
+                    name="-1"
+                    number="1"
+                    type="sub"
+                    click={this.handleMathClick}
+                />
+                <MathButton
+                    name="Reset"
+                    number="0"
+                    type="clear"
+                    click={this.handleMathClick}
+                />
+                <MathButton
+                    name="+100"
+                    number="100"
+                    type="add"
+                    click={this.handleMathClick}
+                />
                 <h1>Click counter: {this.state.count}</h1>
                 <h1>Result: {this.state.result}</h1>
             </>
@@ -50,5 +70,11 @@ class Counter extends React.Component {
     }
 }
 
+
+const MathButton = (props) => {
+    return(
+        <button onClick={() => props.click(props.type,Number(props.number))}>{props.name}</button>
+    )
+}
 
 ReactDOM.render(<React.StrictMode><Counter result={1000} /></React.StrictMode>, document.getElementById("root"))
